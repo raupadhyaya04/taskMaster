@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TaskMaster - get your tasks in order!</title>
+    </head>
+    <body>
+        <header>
+
+        </header>
+
+        <main>
+            <h4>Original List:</h4>
+
+            <ol>
+                {% for item in labelList %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ol>
+
+            <form action="/input/labels/sort" method="post">
+                <label for="removeIndexer">Insert most important task by number:</label>
+                <input type="number" id="removeIndexer" name="removeIndexer">
+            </form>
+
+            <br>
+
+            <h4>Sorted List:</h4>
+            <ol>
+                {% for item in newLabelList %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ol>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>

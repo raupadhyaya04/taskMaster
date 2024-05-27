@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TaskMaster - Get your tasks in order!</title>
+    </head>
+    <body>
+        <header>
+
+        </header>
+
+        <main>
+            <form action = "/input/tasks" method = "post">
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" name="taskName">
+                <br>
+                <label for="taskLabel">Task Label:</label>
+                <br>
+                {% for item in newLabelList %}
+                    <label>item</label>
+                    <input type="radio" name="taskLabel">
+                    <br>
+                {% endfor %}
+                <label for="taskImportance">Importance:</label>
+                <input type="number" max="5" min="1" id="taskImportance" name="taskImportance">
+                <br>
+                <label for="taskDaysRem">Days left:</label>
+                <input type="number" min="0" id="taskDaysRem" name="taskDaysRem">
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+            <br>
+            <a href="/output">Click here to view your ordered list of tasks</a>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>

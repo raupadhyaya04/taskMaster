@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            TaskMaster - Sort your tasks in order!
+        </title>
+
+        <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+        <script defer src="https://pyscript.net/latest/pyscript.js"></script>>
+    </head>
+
+    <body>
+        <header>
+
+        </header>
+
+        <main>
+            <form action = "/input/labels" method = "post">
+                <label for="labelName">Label Name:</label>
+                <input type="text" id="labelName" name="labelName">
+                <br>
+                <input type="submit" value="Submit">
+
+            </form>
+            <br>
+            <a href="/input/labels/sort">Sort labels when you're done</a>
+            <br>
+            <ul>
+                {% for item in labelList %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </main>
+
+        <footer>
+
+        </footer>
+    </body>
+</html>
