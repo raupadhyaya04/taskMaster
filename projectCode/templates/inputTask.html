@@ -15,12 +15,12 @@
                 <input type="text" id="taskName" name="taskName">
                 <br>
                 <label for="taskLabel">Task Label:</label>
+                <select name="taskLabel" id="taskLabel">
+                    {% for label in newLabelList %}
+                        <option value="{{ label }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
                 <br>
-                {% for item in newLabelList %}
-                    <label>item</label>
-                    <input type="radio" name="taskLabel">
-                    <br>
-                {% endfor %}
                 <label for="taskImportance">Importance:</label>
                 <input type="number" max="5" min="1" id="taskImportance" name="taskImportance">
                 <br>

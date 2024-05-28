@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, render_template_string
 import jsonify
 from flask_restful import Resource, Api
 import pandas as pd
@@ -10,6 +10,7 @@ app = Flask(__name__)
 api = Api(app)
 
 newLabelList=[]
+df = []
 
 def returnList():
    return labelList
@@ -38,15 +39,15 @@ def LabelSort():
    return render_template("labelSort.html", labelList=labelList, newLabelList=newLabelList, maxList=len(labelList))
 
 
-@app.route('/input/tasks', methods=['POST', 'GET']) # TODO: Finish creating a list of the options using the labels, fix any other bugs
+@app.route('/input/tasks', methods=['POST', 'GET']) # TODO: Finish the project's algo stuff, fix any other bugs
 def TaskInput():
    if request.method == 'POST':
       webTask = request.form['taskName']
       insertTask(webTask, taskList)
       webTaskLabel = request.form['taskLabel']
       insertLabels(webTaskLabel, labelsList)
-      webTaskImportance = request.form['taskImportance']
-      webDaysRem = request.form['taskDaysRem']
+      webTaskImportance = int(request.form['taskImportance'])
+      webDaysRem = int(request.form['taskDaysRem'])
       insertDaysRem(webDaysRem, daysRemList)
       labelImportanceList = insert_labelImportance(newLabelList)
       labelDict = createLabelDict(newLabelList, labelImportanceList)
@@ -55,15 +56,15 @@ def TaskInput():
 
       sortAllLists(scoreList, taskList, labelsList, daysRemList)
 
-
-   return render_template("inputTask.html")
+   return render_template("inputTask.html", newLabelList=newLabelList)
 
 @app.route('/output')
 def output():
-    if (request.method == 'POST'):
-       listOfLists = [taskList, labelsList, daysRemList, scoreList]
-       df = createDf(listOfLists)
-    return render_template('output.html', df=df)
+   if (request.method== 'GET'):
+      listOfLists = [taskList, labelsList, daysRemList, scoreList]
+      df = createDf(listOfLists)
+
+   return render_template("output.html", df_html=df.to_html(classes='display', table_id='dataframe', index=False))
 
 
 
