@@ -3,9 +3,10 @@
     <head>
         <title>TaskMaster - get your tasks in order!</title>
     </head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <body>
         <header>
-
+            <h1 class="title">Great stuff! now let's sort these labels!</h1>
         </header>
 
         <main>
@@ -19,7 +20,9 @@
 
             <form action="/input/labels/sort" method="post">
                 <label for="removeIndexer">Insert most important task by number:</label>
-                <input type="number" id="removeIndexer" name="removeIndexer">
+                <input type="number" id="removeIndexer" name="removeIndexer" min="1">
+                <br>
+                <input type="submit" value="Submit">
             </form>
 
             <br>
@@ -30,6 +33,8 @@
                     <li>{{ item }}</li>
                 {% endfor %}
             </ol>
+            <br>
+            <a href="/input/tasks">No tasks to sort? Use this link to skip this page then</a>
         </main>
 
         <footer>

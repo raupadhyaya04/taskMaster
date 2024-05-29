@@ -4,11 +4,12 @@
         <title>
             TaskMaster - Sort your tasks in order!
         </title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
 
     <body>
         <header>
-
+            <h1 class="title">Let's start with some labels to be put!</h1>
         </header>
 
         <main>
@@ -22,6 +23,7 @@
             <br>
             <a href="/input/labels/sort">Sort labels when you're done</a>
             <br>
+            <h4>Your list of labels:</h4>
             <ul>
                 {% for item in labelList %}
                     <li>{{ item }}</li>

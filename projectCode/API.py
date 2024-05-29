@@ -2,19 +2,18 @@ from flask import Flask, request, render_template, redirect, url_for, render_tem
 import jsonify
 from flask_restful import Resource, Api
 import pandas as pd
-from Logic import labelList, labelsList, insertDaysRem, insert_label, insert_labelImportance, createLabelDict
-from Logic import insertLabels, sortAllLists, daysRemList, insertTask, taskList, calculateScore, insertScore, scoreList
-from Logic import createDf
+# Importing the backend functions we may need:
+from Logic import insertDaysRem, insert_label, insert_labelImportance, createLabelDict
+from Logic import insertLabels, sortAllLists, insertTask, calculateScore, insertScore, createDf
+# Importing the variables we would need from backend
+from Logic import labelList, labelsList, daysRemList, taskList, scoreList
+newLabelList=[] # Created here to keep within scope, used int multiple functions, same with the imported ones
 
+# Flask setup:
 app = Flask(__name__)
 api = Api(app)
 
-newLabelList=[]
-df = []
-
-def returnList():
-   return labelList
-
+# API begins here:
 @app.route('/')
 def getLandingPage():
    return render_template('index.html')
@@ -23,39 +22,45 @@ def getLandingPage():
 def LabelInput():
    if request.method == 'POST':
       webLabel = request.form['labelName']
-      insert_label(webLabel, labelList)
+      if ((webLabel in labelList) or (webLabel.isalpha() == False)): # Error handling, prevents duplication/non-alphabetical labels
+         pass
+      else:
+         insert_label(webLabel, labelList)
    return render_template("inputLabel.html", labelList=labelList)
 
 @app.route('/input/labels/sort', methods=['POST', 'GET'])
-def LabelSort():
+def LabelSort(): # Measures importance of a type of task vs other tasks, eg Uni Homework vs Household Chores
    if request.method== 'POST':
       webIndex = request.form['removeIndexer']
       webIndex = int(webIndex)
-      webIndex -= 1
-      newLabelList.append(labelList[webIndex])
-      labelList.remove(labelList[webIndex])
-      if (len(labelList) == 0):
-         return redirect(url_for('TaskInput'))
+      if (webIndex > len(labelList)): # Error handling, prevents page from crashing:
+          pass
+      else:
+         webIndex -= 1
+         newLabelList.append(labelList[webIndex])
+         labelList.remove(labelList[webIndex])
+         if (len(labelList) == 0):
+            return redirect(url_for('TaskInput'))
    return render_template("labelSort.html", labelList=labelList, newLabelList=newLabelList, maxList=len(labelList))
 
-
-@app.route('/input/tasks', methods=['POST', 'GET']) # TODO: Finish the project's algo stuff, fix any other bugs
+@app.route('/input/tasks', methods=['POST', 'GET'])
 def TaskInput():
    if request.method == 'POST':
       webTask = request.form['taskName']
-      insertTask(webTask, taskList)
-      webTaskLabel = request.form['taskLabel']
-      insertLabels(webTaskLabel, labelsList)
-      webTaskImportance = int(request.form['taskImportance'])
-      webDaysRem = int(request.form['taskDaysRem'])
-      insertDaysRem(webDaysRem, daysRemList)
-      labelImportanceList = insert_labelImportance(newLabelList)
-      labelDict = createLabelDict(newLabelList, labelImportanceList)
-      webScore = calculateScore(webTaskImportance, webTaskLabel, webDaysRem, labelDict)
-      insertScore(webScore, scoreList)
-
-      sortAllLists(scoreList, taskList, labelsList, daysRemList)
-
+      if ((webTask in taskList) or (webTask.isalpha() == False)): # Error handling, prevents duplication/non-alphabetical task names
+         pass
+      else:
+         insertTask(webTask, taskList)
+         webTaskLabel = request.form['taskLabel']
+         insertLabels(webTaskLabel, labelsList)
+         webTaskImportance = int(request.form['taskImportance'])
+         webDaysRem = int(request.form['taskDaysRem'])
+         insertDaysRem(webDaysRem, daysRemList)
+         labelImportanceList = insert_labelImportance(newLabelList)
+         labelDict = createLabelDict(newLabelList, labelImportanceList)
+         webScore = calculateScore(webTaskImportance, webTaskLabel, webDaysRem, labelDict)
+         insertScore(webScore, scoreList)
+         sortAllLists(scoreList, taskList, labelsList, daysRemList)
    return render_template("inputTask.html", newLabelList=newLabelList)
 
 @app.route('/output')
