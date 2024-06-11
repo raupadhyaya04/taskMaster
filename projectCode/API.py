@@ -1,7 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for, render_template_string
-import jsonify
-from flask_restful import Resource, Api
-import pandas as pd
+from flask import Flask, request, render_template, redirect, url_for
+from flask_restful import Api
 # Importing the backend functions we may need:
 from Logic import insertDaysRem, insert_label, insert_labelImportance, createLabelDict
 from Logic import insertLabels, sortAllLists, insertTask, calculateScore, insertScore, createDf
