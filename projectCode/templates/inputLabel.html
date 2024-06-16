@@ -1,38 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            TaskMaster - Sort your tasks in order!
-        </title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-
-    <body>
-        <header>
-            <h1 class="title">Let's start with some labels to be put!</h1>
-        </header>
-
-        <main>
-            <form action = "/input/labels" method = "post">
-                <label for="labelName">Label Name:</label>
-                <input type="text" id="labelName" name="labelName">
-                <br>
-                <input type="submit" value="Submit">
-
-            </form>
+<head>
+    <title>TaskMaster - Sort your tasks in order!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="title">Let's start with some labels!</h1>
+    </header>
+    <main>
+        <form action="/input/labels" method="post">
+            <label for="labelName">Label Name:</label>
+            <input type="text" id="labelName" name="labelName">
             <br>
-            <a href="/input/labels/sort">Sort labels when you're done</a>
-            <br>
-            <h4>Your list of labels:</h4>
-            <ul>
-                {% for item in labelList %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </main>
-
-        <footer>
-
-        </footer>
-    </body>
+            <input type="submit" value="Submit">
+        </form>
+        <a href="/input/labels/sort" class="btn">Sort labels when you're done</a>
+        <h4>Your list of labels:</h4>
+        <ul>
+            {% for item in labelList %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 TaskMaster</p>
+    </footer>
+</body>
 </html>

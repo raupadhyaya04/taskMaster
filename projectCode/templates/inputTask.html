@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>TaskMaster - Get your tasks in order!</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body>
-        <header>
-            <h1 class="title">Now that you have your labels in, let's insert some tasks!</h1>
-        </header>
-
-        <main>
-            <form action = "/input/tasks" method = "post">
-                <label for="taskName">Task Name:</label>
-                <input type="text" id="taskName" name="taskName">
-                <br>
-                <label for="taskLabel">Task Label:</label>
-                <select name="taskLabel" id="taskLabel">
-                    {% for label in newLabelList %}
-                        <option value="{{ label }}">{{ label }}</option>
-                    {% endfor %}
-                </select>
-                <br>
-                <label for="taskImportance">Importance:</label>
-                <input type="number" max="5" min="1" id="taskImportance" name="taskImportance">
-                <br>
-                <label for="taskDaysRem">Days left:</label>
-                <input type="number" min="0" id="taskDaysRem" name="taskDaysRem">
-                <br>
-                <input type="submit" value="Submit">
-            </form>
+<head>
+    <title>TaskMaster - Get your tasks in order!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="title">Now that you have your labels, let's insert some tasks!</h1>
+    </header>
+    <main>
+        <form action="/input/tasks" method="post">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" name="taskName">
             <br>
-            <a href="/output">Click here to view your ordered list of tasks</a>
-        </main>
-
-        <footer>
-
-        </footer>
-    </body>
+            <label for="taskLabel">Task Label:</label>
+            <select name="taskLabel" id="taskLabel">
+                {% for label in newLabelList %}
+                    <option value="{{ label }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="taskImportance">Importance:</label>
+            <input type="number" max="5" min="1" id="taskImportance" name="taskImportance">
+            <br>
+            <label for="taskDaysRem">Days left:</label>
+            <input type="number" min="0" id="taskDaysRem" name="taskDaysRem">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <a href="/output" class="btn">Click here to view your ordered list of tasks</a>
+    </main>
+    <footer>
+        <p>&copy; 2024 TaskMaster</p>
+    </footer>
+</body>
 </html>

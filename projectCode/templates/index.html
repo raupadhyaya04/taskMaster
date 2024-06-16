@@ -1,44 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            TaskMaster - Sort your tasks in order!
-        </title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-
-    <body>
-        <header>
-            <h1 class="title">Welcome to the TaskMaster!</h1>
+<head>
+    <title>TaskMaster - Sort your tasks in order!</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="title">Welcome to the TaskMaster!</h1>
+        <nav>
             <a href="input/labels" class="option">Insert Labels</a>
-            <hr>
-        </header>
-
-        <main>
-            <pre>
-One may question the need for a TaskMaster, whereas I personally felt that it was of utmost importance that 
-I developed this.
-
-Why?
-
-Because it was 1) really cool to make and 2) useful in ordering my weekly tasks into a to-do list that I could print
-
-Feel free to use this tool by clicking the link above where you start the process of generating your own labels!
-
-How does this work?
-It works by a method of algorithms that sort your tasks by:
-1. Considering the nature of the task vs the nature of other tasks (e.g. Uni work vs Household chores), note you cannot use symbols/numbers
-2. Considering the importance of the task at hand on a scale of 1-5 
-   (e.g. For a task labelled Uni, 5 would be something that counts for your module grade, whereas 1 would be something useless like society stuff)
-3. Considering the days you have left to finish this task
-
-This is then run into a formula where the label's importance, task's importance and the amount of days remaining are considered
-We do this for all your tasks, and then sort them based on the result of the aforementioned formula
-            </pre>
-        </main>
-
-        <footer>
-
-        </footer>
-    </body>
+        </nav>
+    </header>
+    <main>
+        <section class="intro">
+            <p>One may question the need for a TaskMaster, whereas I personally felt that it was of utmost importance that I developed this.</p>
+            <p>Why?</p>
+            <ul>
+                <li>It was really cool to make</li>
+                <li>Useful in ordering my weekly tasks into a to-do list that I could print</li>
+            </ul>
+            <p>Feel free to use this tool by clicking the link above where you start the process of generating your own labels!</p>
+            <h2>How does this work?</h2>
+            <p>It works by a method of algorithms that sort your tasks by:</p>
+            <ol>
+                <li>Considering the nature of the task vs the nature of other tasks (e.g., Uni work vs Household chores), note you cannot use symbols/numbers</li>
+                <li>Considering the importance of the task at hand on a scale of 1-5 (e.g., For a task labelled Uni, 5 would be something that counts for your module grade, whereas 1 would be something less critical like society stuff)</li>
+                <li>Considering the days you have left to finish this task</li>
+            </ol>
+            <p>This is then run into a formula where the label's importance, task's importance, and the amount of days remaining are considered. We do this for all your tasks and then sort them based on the result of the aforementioned formula.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 TaskMaster</p>
+    </footer>
+</body>
 </html>
