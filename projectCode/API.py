@@ -37,7 +37,9 @@ def LabelSort(): # Measures importance of a type of task vs other tasks, eg Uni 
          webIndex -= 1
          newLabelList.append(labelList[webIndex])
          labelList.remove(labelList[webIndex])
-         if (len(labelList) == 0):
+         if (len(labelList) == 1):
+            newLabelList.append(labelList[0])
+            labelList.remove(labelList[0])
             return redirect(url_for('TaskInput'))
    return render_template("labelSort.html", labelList=labelList, newLabelList=newLabelList, maxList=len(labelList))
 
