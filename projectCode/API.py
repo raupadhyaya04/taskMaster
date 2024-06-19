@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_restful import Api
 # Importing the backend functions we may need:
 from Logic import insertDaysRem, insert_label, insert_labelImportance, createLabelDict
-from Logic import insertLabels, sortAllLists, insertTask, calculateScore, insertScore, createDf
+from Logic import insertLabels, sortAllLists, insertTask, calculateScore, insertScore, createDf, createCSV
 # Importing the variables we would need from backend
 from Logic import labelList, labelsList, daysRemList, taskList, scoreList
 newLabelList=[] # Created here to keep within scope, used int multiple functions, same with the imported ones
@@ -65,11 +65,19 @@ def TaskInput():
 
 @app.route('/output')
 def output():
-   if (request.method== 'GET'):
+   if (request.method == 'GET'):
       listOfLists = [taskList, labelsList, daysRemList, scoreList]
       df = createDf(listOfLists)
+      createCSV(df)
 
    return render_template("output.html", df_html=df.to_html(classes='display', table_id='dataframe', index=False))
+
+"""""""""
+@app.route('/download'):
+def download():
+   if (request.method == 'GET'):
+"""""""""
+
 
 @app.errorhandler(404)
 def page_not_found(e):

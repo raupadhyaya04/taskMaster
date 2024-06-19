@@ -112,6 +112,9 @@ def createDf(listOfLists):
   df.columns = ["Task", "Label", "Days Remaining", "Score"]
   return df
 
+def createCSV(df):
+  df.to_csv('df.csv', index=False)
+
 # Label List
 labelList = []
 
