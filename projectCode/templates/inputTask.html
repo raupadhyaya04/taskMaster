@@ -29,6 +29,15 @@
             <input type="submit" value="Submit">
         </form>
         <a href="/output" class="btn">Click here to view your ordered list of tasks</a>
+
+        <section>
+            <h4>Task List:</h4>
+            <ol>
+                {% for task in taskList %}
+                    <li>{{ task }}</li>
+                {% endfor %}
+            </ol>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 TaskMaster</p>

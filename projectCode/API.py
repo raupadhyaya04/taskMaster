@@ -47,7 +47,7 @@ def LabelSort(): # Measures importance of a type of task vs other tasks, eg Uni 
 def TaskInput():
    if request.method == 'POST':
       webTask = request.form['taskName']
-      if ((webTask in taskList) or (webTask.isalpha() == False)): # Error handling, prevents duplication/non-alphabetical task names
+      if ((webTask in taskList) or ((" " in webTask == False) and (webTask.isalpha() == False))): # Error handling, prevents duplication/non-alphabetical task names
          pass
       else:
          insertTask(webTask, taskList)
@@ -61,7 +61,7 @@ def TaskInput():
          webScore = calculateScore(webTaskImportance, webTaskLabel, webDaysRem, labelDict)
          insertScore(webScore, scoreList)
          sortAllLists(scoreList, taskList, labelsList, daysRemList)
-   return render_template("inputTask.html", newLabelList=newLabelList)
+   return render_template("inputTask.html", newLabelList=newLabelList, taskList=taskList)
 
 @app.route('/output')
 def output():
