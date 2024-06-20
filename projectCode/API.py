@@ -73,9 +73,11 @@ def output():
    return render_template("output.html", df_html=df.to_html(classes='display', table_id='dataframe', index=False))
 
 """""""""
-@app.route('/download'):
+@app.route('/download')
 def download():
-   if (request.method == 'GET'):
+   listOfLists = [taskList, labelsList, daysRemList, scoreList]
+   df = createDf(listOfLists)
+   return render_template("download.html", df_html=df.to_html(classes='display', table_id='dataframe', index=False))
 """""""""
 
 
