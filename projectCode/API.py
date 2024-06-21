@@ -20,7 +20,7 @@ def getLandingPage():
 def LabelInput():
    if request.method == 'POST':
       webLabel = request.form['labelName']
-      if ((webLabel in labelList) or (webLabel.isalpha() == False)): # Error handling, prevents duplication/non-alphabetical labels
+      if ((webLabel in labelList) or ((" " in webLabel == False) and (webLabel.isalpha() == False))): # Error handling, prevents duplication/non-alphabetical labels
          pass
       else:
          insert_label(webLabel, labelList)
